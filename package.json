@@ -1,0 +1,24 @@
+{
+  "name": "n-crawler",
+  "version": "1.0.0",
+  "description": "a nodejs crawler",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "crawler",
+    "nodejs"
+  ],
+  "author": "HuangTengfei",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "cheerio": "^0.19.0",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "monk": "^1.0.1",
+    "q": "^1.4.1",
+    "superagent": "^1.7.2"
+  }
+}
