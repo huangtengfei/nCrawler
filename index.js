@@ -1,8 +1,9 @@
 'use strict';
 
-const superagent = require('superagent');
+var request = require('request');
 
-superagent.get('https://www.baidu.com')
-	.end(function(err, res) {
-		console.log(res);
-	})
+var url = 'https://www.zhihu.com/question/33946642';
+
+request(url, (err, resp, body) => {
+	console.log(body);
+})
