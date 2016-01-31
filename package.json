@@ -13,9 +13,11 @@
   "author": "HuangTengfei",
   "license": "ISC",
   "dependencies": {
+    "async": "^1.5.2",
     "body-parser": "^1.14.2",
     "cheerio": "^0.19.0",
     "ejs": "^2.4.1",
+    "eventproxy": "^0.3.4",
     "express": "^4.13.4",
     "monk": "^1.0.1",
     "path": "^0.12.7",
