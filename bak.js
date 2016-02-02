@@ -13,53 +13,33 @@ let topics = ['19552521'],	// 主题数组
 	result = [];	// 结果数组
 
 let url = 'https://www.zhihu.com/topic/19552521/questions?page=';
-for (let i = 1; i <= 50; i++) {
+for (let i = 1; i <= 10; i++) {
     let currUrl = url + i;
     pageUrls.push(currUrl);
 }
 
-let pageUrlCount = 0;
-
-let crawlPage = (url, callback) => {
-    // 设定一个500-1500毫秒之间的时延，不然会导致request过于频繁，不过这个时间间隔还没找到合适值
-    let delay = parseInt(Math.random() * 1000 + 500);
-
-    pageUrlCount++;
-    console.log('现在的并发数是', pageUrlCount, '，正在抓取的是', url, '，耗时' + delay + '毫秒');
-
+pageUrls.forEach((url) => {
     httpRequest(url, process);
-
-    setTimeout(() => {
-        pageUrlCount--;
-        callback(null, url + ' content call back');
-    }, delay);
-}
-
-// 线程太多也会导致request过于频繁，如果是pageUrls超过50，线程为5就会有一定概率炸了
-async.mapLimit(pageUrls, 2, (url, callback) => {
-    crawlPage(url, callback);
-}, (err, res) => {
-    console.log(res);
-}); 
+})
 
 // 当所有 'QuestionUrl' 事件完成后的回调触发下面事件
 ep.after('QuestionUrl', pageUrls.length * 20, (quesUrls) => {
     
 
-    let quesUrlCount = 0;
+    let currCount = 0;
 
     let crawlEach = (url, callback) => {
 
-        // 设定一个500-1500毫秒之间的时延，不然会导致request过于频繁，不过这个时间间隔还没找到合适值
-    	let delay = parseInt(Math.random() * 900 + 500);
+        // 设定一个100-1000毫秒之间的时延，不然会导致request过于频繁
+    	let delay = parseInt(Math.random() * 900 + 100);
 
-    	quesUrlCount++;
-    	console.log('现在的并发数是', quesUrlCount, '，正在抓取的是', url, '，耗时' + delay + '毫秒');
+    	currCount++;
+    	console.log('现在的并发数是', currCount, '，正在抓取的是', url, '，耗时' + delay + '毫秒');
 
     	httpRequest(url, parseEach);
 
     	setTimeout(() => {
-        	quesUrlCount--;
+        	currCount--;
         	callback(null, url + ' content call back');
         }, delay);
     };
